@@ -1,0 +1,9 @@
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\bin\Debug\netcoreapp2.1\PetApp.Core.Entity.deps.json
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\bin\Debug\netcoreapp2.1\PetApp.Core.Entity.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\bin\Debug\netcoreapp2.1\PetApp.Core.Entity.pdb
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.csprojAssemblyReference.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.csproj.CoreCompileInputs.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.AssemblyInfoInputs.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.AssemblyInfo.cs
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Core.Entity\obj\Debug\netcoreapp2.1\PetApp.Core.Entity.pdb

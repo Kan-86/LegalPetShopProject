@@ -1,0 +1,14 @@
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.deps.json
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.pdb
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetApp.Core.Entity.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetAppCore.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetAppCore.pdb
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\bin\Release\netcoreapp2.1\PetApp.Core.Entity.pdb
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.csprojAssemblyReference.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.csproj.CoreCompileInputs.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.AssemblyInfoInputs.cache
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.AssemblyInfo.cs
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.csproj.CopyComplete
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.dll
+W:\Skóli\3Önn\PetShopMain\LegalPetShopProject\PetApp.Infastructure.Static.Data\obj\Release\netcoreapp2.1\PetApp.Infastructure.Static.Data.pdb
