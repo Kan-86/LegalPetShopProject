@@ -5,20 +5,20 @@ using System.Text;
 
 namespace PetAppCore.ApplicationServices.Services
 {
-    interface IOwnerServices
+    public interface IOwnerServices
     {
-        //Owner GetOwnerInstance();
+        Owner GetOwnerInstance();
 
-        //List<Owner> GetOwners();
+        List<Owner> GetOwners();
 
-        //Owner AddOwner(Owner owner);
+        Owner AddOwner(Owner owner);
 
-        //void DeleteOwner(int id);
+        void DeleteOwner(int id);
 
-        //List<Owner> FindOwnerName();
+        List<Owner> FindOwnerName();
 
-        //Owner FindOwnerById(int id);
+        Owner FindOwnerById(int id);
 
-        //Owner UpdateOwner(Owner ownerUpdate);
+        Owner UpdateOwner(Owner ownerUpdate);
     }
 }

@@ -48,10 +48,6 @@ namespace PetShopRestAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Pet pet)
         {
-            if (id < 1 || id != pet.Id)
-            {
-                BadRequest("Parameter Id and Pet ID must match.");
-            }
             var entity = _petService.UpdatePet(pet);
             entity.PetName = pet.PetName;
             entity.PetType = pet.PetType;

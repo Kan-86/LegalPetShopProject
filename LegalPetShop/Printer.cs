@@ -1,5 +1,6 @@
 ﻿using PetApp.Core.Entity;
 using PetAppCore.ApplicationServices;
+using PetAppCore.ApplicationServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace LegalPetShop
     public class Printer: IPrinter
     {
         readonly IPetService _petService;
+        readonly IOwnerServices _ownerService;
 
         public Printer(IPetService petService)
         {
@@ -158,7 +160,6 @@ namespace LegalPetShop
                     $"{pet.Colour}\nNamee: {pet.PetName}\nType: " +
                     $"{pet.PetType}\nPrice: {pet.Price}\nPrevious Owner: " +
                     $"{pet.PetPreviousOwner} \nDetails: {pet.Details}\n"
-
             );}
         }
 

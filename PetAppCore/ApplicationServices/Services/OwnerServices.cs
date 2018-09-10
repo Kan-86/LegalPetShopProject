@@ -16,55 +16,55 @@ namespace PetAppCore.ApplicationServices.Services
             _ownerRepository = ownerRepositories;
         }
 
-        //public Owner AddOwner(Owner owner)
-        //{
-        //    if (string.IsNullOrEmpty(owner.Address))
-        //    {
-        //        throw new InvalidOperationException("Owner needs an address");
-        //    }
-        //    return _ownerRepository.CreateOwner(owner);
-        //}
+        public Owner AddOwner(Owner owner)
+        {
+            if (string.IsNullOrEmpty(owner.Address))
+            {
+                throw new InvalidOperationException("Owner needs an address");
+            }
+            return _ownerRepository.CreateOwner(owner);
+        }
 
-        //public void DeleteOwner(int id)
-        //{
-        //    if (id < 1)
-        //    {
-        //        throw new InvalidOperationException("Owner Id needs to be larger then 0");
-        //    }
-        //    _ownerRepository.DeleteOwner(id);
-        //}
+        public void DeleteOwner(int id)
+        {
+            if (id < 1)
+            {
+                throw new InvalidOperationException("Owner Id needs to be larger then 0");
+            }
+            _ownerRepository.DeleteOwner(id);
+        }
 
         public Owner FindOwnerById(int id)
         {
             return _ownerRepository.ReadyById(id);
         }
 
-        //public List<Owner> FindOwnerName()
-        //{
-        //    return _ownerRepository.ReadOwner()
-        //        .Where(owner => owner.FirstName.Equals(owner.FirstName))
-        //        .ToList();
-        //}
+        public List<Owner> FindOwnerName()
+        {
+            return _ownerRepository.ReadOwner()
+                .Where(owner => owner.FirstName.Equals(owner.FirstName))
+                .ToList();
+        }
 
-        //public Owner GetOwnerInstance()
-        //{
-        //    return new Owner();
-        //}
+        public Owner GetOwnerInstance()
+        {
+            return new Owner();
+        }
 
-        //public List<Owner> GetOwners()
-        //{
-        //    return _ownerRepository.ReadOwner().ToList();
-        //}
+        public List<Owner> GetOwners()
+        {
+            return _ownerRepository.ReadOwner().ToList();
+        }
 
-        //public Owner UpdateOwner(Owner ownerUpdate)
-        //{
-        //    var owner = FindOwnerById(ownerUpdate.Id);
-        //    owner.FirstName = ownerUpdate.FirstName;
-        //    owner.LastName = ownerUpdate.LastName;
-        //    owner.Address = ownerUpdate.Address;
-        //    owner.Email = ownerUpdate.Email;
-        //    owner.PhoneNumber = ownerUpdate.PhoneNumber;
-        //    return owner;
-        //}
+        public Owner UpdateOwner(Owner ownerUpdate)
+        {
+            var owner = FindOwnerById(ownerUpdate.Id);
+            owner.FirstName = ownerUpdate.FirstName;
+            owner.LastName = ownerUpdate.LastName;
+            owner.Address = ownerUpdate.Address;
+            owner.Email = ownerUpdate.Email;
+            owner.PhoneNumber = ownerUpdate.PhoneNumber;
+            return owner;
+        }
     }
 }

@@ -114,7 +114,7 @@ namespace PetApp.Infastructure.Static.Data.Repositories
                 PetName = "mr.Snuggles",
                 PetType = "Cat",
                 Colour = "Black and white",
-                PetPreviousOwner = new Owner() {Id = 9},
+                PetPreviousOwner = owner1,
                 PetBirthDate = new DateTime(2014, 6, 29),
                 //PetSoldDate = new DateTime(2014, 08,  24),
                 Details = "Details:  \tlooks like a regular cat, it's white, fluffy" +
