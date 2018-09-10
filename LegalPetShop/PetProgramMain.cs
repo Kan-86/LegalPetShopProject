@@ -15,6 +15,7 @@ namespace LegalPetShop
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPetRepositories, PetRepositories>();
+            serviceCollection.AddScoped<IOwnerRepositories, OwnerRepositories>();
             serviceCollection.AddScoped<IPetService, PetServices>();
 
             serviceCollection.AddScoped<IPrinter, Printer>();

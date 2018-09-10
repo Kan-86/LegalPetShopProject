@@ -92,13 +92,15 @@ namespace LegalPetShop
         private void SearchPetType()
         {
             var list = _petService.FindPetType();
-
-
-            foreach (var pet in list)
+            var input = Console.ReadLine();
+            if (input.Contains("1"))
             {
-
-                Console.WriteLine(pet.PetType + " " + pet.PetName);
+                foreach (var pet in list)
+                {
+                    Console.WriteLine(pet.PetType + " " + pet.PetName);
+                }
             }
+
         }
 
         private void DeletePet()
@@ -128,7 +130,7 @@ namespace LegalPetShop
             pet.PetType = Console.ReadLine();
 
             Console.WriteLine("Type Pet Previous Owner:");
-            pet.PetPreviousOwner = Console.ReadLine();
+            //pet.PetPreviousOwner = Console.ReadLine();
 
 
 
@@ -154,7 +156,7 @@ namespace LegalPetShop
             {
                 Console.WriteLine($"Id: {pet.Id}\nColour: " +
                     $"{pet.Colour}\nNamee: {pet.PetName}\nType: " +
-                    $"{pet.PetType}\nPrice: {pet.Price}\n Previous Owner " +
+                    $"{pet.PetType}\nPrice: {pet.Price}\nPrevious Owner: " +
                     $"{pet.PetPreviousOwner} \nDetails: {pet.Details}\n"
 
             );}

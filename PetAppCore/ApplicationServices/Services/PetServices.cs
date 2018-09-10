@@ -11,9 +11,13 @@ namespace PetAppCore.Services
     public class PetServices : IPetService
     {
         readonly IPetRepositories _petRepository;
-        public PetServices(IPetRepositories petRepositories)
+        readonly IOwnerRepositories _ownerRepositories;
+
+        public PetServices(IPetRepositories petRepositories,
+            IOwnerRepositories ownerRepositories)
         {
             _petRepository = petRepositories;
+            _ownerRepositories = ownerRepositories;
         }
 
         public Pet AddPet(Pet pet)
@@ -41,7 +45,12 @@ namespace PetAppCore.Services
 
         public List<Pet> GetPets()
         {
-            return _petRepository.ReadPets().ToList();
+            var listPets = _petRepository.ReadPets().ToList();
+            foreach (var pet in listPets)
+            {
+                pet.PetPreviousOwner = _ownerRepositories.ReadyById(pet.PetPreviousOwner.Id);
+            }
+            return listPets;
         }
 
         public List<Pet> SortPetByPrice()
@@ -61,7 +70,7 @@ namespace PetAppCore.Services
         public List<Pet> FindPetType()
         {
             return _petRepository.ReadPets()
-            .Where(pet => pet.PetType.Equals(_petRepository.ReadPets()))
+            .Where(pet => pet.PetType.Equals(pet.PetType))
             .ToList();
         }
 
@@ -74,6 +83,7 @@ namespace PetAppCore.Services
         {
             var pet = FindPetById(petUpdate.Id);
             pet.PetName = petUpdate.PetName;
+            pet.PetType = petUpdate.PetType;
             pet.Price = petUpdate.Price;
             return pet;
         }

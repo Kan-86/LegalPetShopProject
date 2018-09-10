@@ -11,9 +11,9 @@ namespace PetApp.Core.Entity
         public string PetName { get; set; }
         public string PetType { get; set; }
         public string Colour { get; set; }
-        public string PetPreviousOwner { get; set; }
+        public Owner PetPreviousOwner { get; set; }
         public string Details { get; set; }
-        //public DateTime PetBirthDate { get; set; }
+        public DateTime PetBirthDate { get; set; }
         //public DateTime PetSoldDate { get; set; }
     }
 }

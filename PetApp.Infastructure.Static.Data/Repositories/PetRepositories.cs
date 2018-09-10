@@ -11,6 +11,7 @@ namespace PetApp.Infastructure.Static.Data.Repositories
     {
         static int id = 1;
         private static List<Pet> _pets = FakeDB.Pets.ToList();
+
         public Pet CreatePet(Pet pet)
         {
             pet.Id = FakeDB.PetID++;
