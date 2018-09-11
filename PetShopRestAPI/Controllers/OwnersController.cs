@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetApp.Core.Entity;
+using PetAppCore.ApplicationServices;
 using PetAppCore.ApplicationServices.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -54,13 +55,15 @@ namespace PetShopRestAPI.Controllers
             entity.FirstName = owner.FirstName;
             entity.LastName = owner.LastName;
             entity.Address = owner.Address;
-            
+            entity.PhoneNumber = owner.PhoneNumber;
+            entity.Email = owner.Email;
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _ownerService.DeleteOwner(id);
         }
     }
 }

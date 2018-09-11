@@ -12,9 +12,10 @@ namespace LegalPetShop
         readonly IPetService _petService;
         readonly IOwnerServices _ownerService;
 
-        public Printer(IPetService petService)
+        public Printer(IPetService petService, IOwnerServices ownerService)
         {
             _petService = petService;
+            _ownerService = ownerService;
         }
 
         void IPrinter.StartUI()
@@ -154,13 +155,20 @@ namespace LegalPetShop
         private void ShowAllPets()
         {
             var listOfPets = _petService.GetPets();
+            var listOfOwners = _ownerService.GetOwners();
             foreach (var pet in listOfPets)
             {
                 Console.WriteLine($"Id: {pet.Id}\nColour: " +
                     $"{pet.Colour}\nNamee: {pet.PetName}\nType: " +
                     $"{pet.PetType}\nPrice: {pet.Price}\nPrevious Owner: " +
-                    $"{pet.PetPreviousOwner} \nDetails: {pet.Details}\n"
-            );}
+                    $"{pet.PetPreviousOwner} \nDetails: {pet.Details}\n");
+                foreach (var owner in listOfOwners)
+                {
+                    Console.WriteLine("Name: " + owner.FirstName);
+                }
+            
+            }
+
         }
 
         int ShowMenu(string[] menuItems)
