@@ -58,7 +58,7 @@ namespace PetAppCore.ApplicationServices.Services
 
         public Owner UpdateOwner(Owner ownerUpdate)
         {
-            var owner = FindOwnerById(ownerUpdate.Id);
+            var owner = _ownerRepository.Update(ownerUpdate);
             owner.FirstName = ownerUpdate.FirstName;
             owner.LastName = ownerUpdate.LastName;
             owner.Address = ownerUpdate.Address;

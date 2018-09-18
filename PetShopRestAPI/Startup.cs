@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PetApp.Infastructure.Static.Data;
 using PetApp.Infastructure.Static.Data.Repositories;
+using PetApp.Infastructure.Static.Data.SQLRepositories;
 using PetAppCore.ApplicationServices;
 using PetAppCore.ApplicationServices.Services;
 using PetAppCore.DomainService;
@@ -31,11 +36,21 @@ namespace PetShopRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPetRepositories, PetRepositories>();
+            services.AddDbContext<PetShopAppContext>(
+                opt => opt.UseInMemoryDatabase("DBOne"));
+            
+            services.AddScoped<IPetRepositories, SQLPetRepository>();
             services.AddScoped<IPetService, PetServices>();
 
-            services.AddScoped<IOwnerRepositories, OwnerRepositories>();
+            services.AddScoped<IOwnerRepositories, SQLOwnerRepository>();
             services.AddScoped<IOwnerServices, OwnerServices>();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

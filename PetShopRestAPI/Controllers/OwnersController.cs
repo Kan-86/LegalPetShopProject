@@ -40,7 +40,7 @@ namespace PetShopRestAPI.Controllers
         public ActionResult<Owner> Post([FromBody]Owner owner)
         {
             owner.Id = 0;
-            if (string.IsNullOrEmpty(owner.Address))
+            if (string.IsNullOrEmpty(owner.Address)||string.IsNullOrEmpty(owner.FirstName) || string.IsNullOrEmpty(owner.LastName))
             {
                 return null;
             }
@@ -49,7 +49,7 @@ namespace PetShopRestAPI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Owner owner)
+        public ActionResult<Owner> Put(int id, [FromBody]Owner owner)
         {
             var entity = _ownerService.UpdateOwner(owner);
             entity.FirstName = owner.FirstName;
@@ -57,6 +57,7 @@ namespace PetShopRestAPI.Controllers
             entity.Address = owner.Address;
             entity.PhoneNumber = owner.PhoneNumber;
             entity.Email = owner.Email;
+            return entity;
         }
 
         // DELETE api/<controller>/5

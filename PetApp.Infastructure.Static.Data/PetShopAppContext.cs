@@ -1,0 +1,16 @@
+﻿using Microsoft.EntityFrameworkCore;
+using PetApp.Core.Entity;
+
+namespace PetApp.Infastructure.Static.Data
+{
+    public class PetShopAppContext:DbContext
+    {
+        public PetShopAppContext(DbContextOptions<PetShopAppContext> opt): base(opt)
+        {
+
+        }
+
+        public DbSet<Pet> Pet { get; set; }
+        public DbSet<Owner> Owners { get; set; }
+    }
+}

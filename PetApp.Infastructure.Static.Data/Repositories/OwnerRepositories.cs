@@ -34,6 +34,7 @@ namespace PetApp.Infastructure.Static.Data.Repositories
              == id);
             owners.Remove(ownerToDelete);
             FakeDB.Owners = owners;
+
         }
 
         public IEnumerable<Owner> ReadOwner()

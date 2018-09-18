@@ -54,6 +54,11 @@ namespace PetApp.Infastructure.Static.Data.Repositories
             {
                 pet.PetName = petUpdate.PetName;
                 pet.Price = petUpdate.Price;
+                pet.PetType = petUpdate.PetType;
+                pet.Colour = petUpdate.Colour;
+                pet.Details = petUpdate.Details;
+                pet.PetBirthDate = petUpdate.PetBirthDate;
+
                 return pet;
             }
             if (pet == null)

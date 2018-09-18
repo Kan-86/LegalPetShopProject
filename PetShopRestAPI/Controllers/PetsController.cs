@@ -46,13 +46,14 @@ namespace PetShopRestAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Pet pet)
+        public Pet Put([FromBody] Pet pet)
         {
             var entity = _petService.UpdatePet(pet);
             entity.PetName = pet.PetName;
             entity.PetType = pet.PetType;
             entity.Price = pet.Price;
             entity.PetPreviousOwner = pet.PetPreviousOwner;
+            return entity;
         }
 
         // DELETE api/values/5
