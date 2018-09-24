@@ -19,6 +19,8 @@ namespace PetAppCore.ApplicationServices.Services
 
         Owner FindOwnerById(int id);
 
+        Owner FindOwnerByIdIncludePets(int id);
+
         Owner UpdateOwner(Owner ownerUpdate);
     }
 }

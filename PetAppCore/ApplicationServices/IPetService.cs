@@ -23,6 +23,8 @@ namespace PetAppCore.ApplicationServices
 
         Pet FindPetById(int id);
 
+        Pet FindPetByIdIncludOwners(int id);
+
         Pet UpdatePet(Pet petUpdate);
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PetApp.Core.Entity;
 using PetApp.Infastructure.Static.Data;
 using PetApp.Infastructure.Static.Data.Repositories;
 using PetApp.Infastructure.Static.Data.SQLRepositories;
@@ -36,9 +37,12 @@ namespace PetShopRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*services.AddDbContext<PetShopAppContext>(
+                opt => opt.UseInMemoryDatabase("DBOne"));*/
+
             services.AddDbContext<PetShopAppContext>(
-                opt => opt.UseInMemoryDatabase("DBOne"));
-            
+                opt => opt.UseSqlite("Data Source=petApp.db"));
+
             services.AddScoped<IPetRepositories, SQLPetRepository>();
             services.AddScoped<IPetService, PetServices>();
 
@@ -61,6 +65,11 @@ namespace PetShopRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                    DBInitializer.SeedDb(ctx);
+                }
             }
             else
             {

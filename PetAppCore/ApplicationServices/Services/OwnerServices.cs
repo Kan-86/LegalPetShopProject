@@ -10,10 +10,13 @@ namespace PetAppCore.ApplicationServices.Services
     public class OwnerServices : IOwnerServices
     {
         readonly IOwnerRepositories _ownerRepository;
+        readonly IPetRepositories _petRepositories;
 
-        public OwnerServices(IOwnerRepositories ownerRepositories)
+        public OwnerServices(IOwnerRepositories ownerRepositories
+            , IPetRepositories petRepositories)
         {
             _ownerRepository = ownerRepositories;
+            _petRepositories = petRepositories;
         }
 
         public Owner AddOwner(Owner owner)
@@ -37,6 +40,16 @@ namespace PetAppCore.ApplicationServices.Services
         public Owner FindOwnerById(int id)
         {
             return _ownerRepository.ReadyById(id);
+        }
+
+        public Owner FindOwnerByIdIncludePets(int id)
+        {
+            var owner = _ownerRepository.ReadyById(id);
+            owner.Pets = _petRepositories.ReadPets()
+                .Where(pet => pet.PetPreviousOwner != 
+                null && pet.PetPreviousOwner.Id == owner.Id)
+                .ToList();
+            return owner;
         }
 
         public List<Owner> FindOwnerName()
