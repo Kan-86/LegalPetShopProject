@@ -12,5 +12,6 @@ namespace PetApp.Core.Entity
         public string Address { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
+        public List<Pet> Pets { get; set; }
     }
 }
