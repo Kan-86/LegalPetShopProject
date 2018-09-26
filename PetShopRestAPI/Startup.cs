@@ -101,6 +101,11 @@ namespace PetShopRestAPI
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 app.UseHsts();
             }
 
