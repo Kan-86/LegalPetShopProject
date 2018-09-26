@@ -68,7 +68,7 @@ namespace PetShopRestAPI
             {
                 services.AddDbContext<PetShopAppContext>(
                     opt => opt
-                        .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+                        .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
             }
 
             services.AddScoped<IPetRepositories, SQLPetRepository>();
