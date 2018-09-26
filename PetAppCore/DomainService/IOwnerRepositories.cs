@@ -18,5 +18,7 @@ namespace PetAppCore.DomainService
         Owner ReadyById(int id);
 
         Owner Update(Owner ownerUpdate);
+
+        Owner ReadyByIdIncludePets(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using PetApp.Core.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using PetApp.Core.Entity;
 using PetAppCore.DomainService;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,17 @@ namespace PetApp.Infastructure.Static.Data.SQLRepositories
 
         public Owner CreateOwner(Owner owner)
         {
-            _ctx.Add(owner);
+            /*if (owner.Pets != null
+                && _ctx.ChangeTracker.Entries<Owner>()
+                .FirstOrDefault(oe => oe.Entity.Id == owner.Id) == null)
+            {
+                _ctx.Attach(owner);
+            }
+            var saved =_ctx.Owners.Add(owner).Entity;
+            _ctx.SaveChanges();
+            return saved;*/
+
+            _ctx.Attach(owner).State = EntityState.Added;
             _ctx.SaveChanges();
             return owner;
         }
@@ -30,26 +41,55 @@ namespace PetApp.Infastructure.Static.Data.SQLRepositories
 
         public IEnumerable<Owner> ReadOwner()
         {
-            return _ctx.Owners;
+            return _ctx.Owners.Include(o => o.Pets);
         }
 
         public Owner ReadyById(int id)
         {
-            return _ctx.Owners.FirstOrDefault(c => c.Id == id);
+            return _ctx.Owners.Include(p => p.Pets)
+                .FirstOrDefault(c => c.Id == id);
         }
 
         public Owner Update(Owner ownerUpdate)
         {
-            _ctx.Owners.Update(ownerUpdate);
+            /*_ctx.Owners.Update(ownerUpdate);
+            _ctx.SaveChanges();
+            return ownerUpdate;*/
+
+            /*if (ownerUpdate.Pets != null
+                && _ctx.ChangeTracker.Entries<Pet>()
+                .FirstOrDefault(oe => oe.Entity.Id == ownerUpdate.Id) == null)
+            {
+                _ctx.Attach(ownerUpdate.Pets);
+            }
+            else
+            {
+                _ctx.Entry(ownerUpdate)
+                    .Reference(o => o.Pets).IsModified = true;
+            }
+            var updated = _ctx.Owners.Update(ownerUpdate).Entity;
+            _ctx.SaveChanges();*/
+            _ctx.Attach(ownerUpdate).State = EntityState.Modified;
+            _ctx.Entry(ownerUpdate)
+                .Reference(o => o.Pets).IsModified = true;
             _ctx.SaveChanges();
             return ownerUpdate;
         }
 
         public void DeleteOwner(int id)
         {
-            var pet = ReadyById(id);
-            _ctx.Owners.Remove(pet);
+            _ctx.Remove(new Owner() { Id = id });
             _ctx.SaveChanges();
+            /*var pet = ReadyById(id);
+            _ctx.Owners.Remove(pet);
+            _ctx.SaveChanges();*/
+        }
+
+        public Owner ReadyByIdIncludePets(int id)
+        {
+            return _ctx.Owners
+                .Include(o => o.Pets)
+                .FirstOrDefault(o => o.Id == id);
         }
     }
 }

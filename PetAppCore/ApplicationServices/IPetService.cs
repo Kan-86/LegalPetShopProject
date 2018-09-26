@@ -26,5 +26,7 @@ namespace PetAppCore.ApplicationServices
         Pet FindPetByIdIncludOwners(int id);
 
         Pet UpdatePet(Pet petUpdate);
+
+        List<Pet> GetFilteredPets(Filter filter);
     }
 }

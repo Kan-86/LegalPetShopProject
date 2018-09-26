@@ -26,10 +26,26 @@ namespace PetShopRestAPI
 {
     public class Startup
     {
+        /*
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            FakeDB.InitData();
+            //FakeDB.InitData();
+        }*/
+
+        private IConfiguration _conf { get; }
+
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            _conf = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -40,8 +56,20 @@ namespace PetShopRestAPI
             /*services.AddDbContext<PetShopAppContext>(
                 opt => opt.UseInMemoryDatabase("DBOne"));*/
 
-            services.AddDbContext<PetShopAppContext>(
-                opt => opt.UseSqlite("Data Source=petApp.db"));
+            /*services.AddDbContext<PetShopAppContext>(
+                opt => opt.UseSqlite("Data Source=petApp.db"));*/
+
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<PetShopAppContext>(
+                    opt => opt.UseSqlite("Data Source=customerApp.db"));
+            }
+            else if (_env.IsProduction())
+            {
+                services.AddDbContext<PetShopAppContext>(
+                    opt => opt
+                        .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+            }
 
             services.AddScoped<IPetRepositories, SQLPetRepository>();
             services.AddScoped<IPetService, PetServices>();

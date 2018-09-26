@@ -71,5 +71,15 @@ namespace PetApp.Infastructure.Static.Data.Repositories
 
             return null;
         }
+
+        public object ReadyByIdIncludePets(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Owner IOwnerRepositories.ReadyByIdIncludePets(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

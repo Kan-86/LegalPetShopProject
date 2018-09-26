@@ -44,11 +44,7 @@ namespace PetAppCore.ApplicationServices.Services
 
         public Owner FindOwnerByIdIncludePets(int id)
         {
-            var owner = _ownerRepository.ReadyById(id);
-            owner.Pets = _petRepositories.ReadPets()
-                .Where(pet => pet.PetPreviousOwner != 
-                null && pet.PetPreviousOwner.Id == owner.Id)
-                .ToList();
+            var owner = _ownerRepository.ReadyByIdIncludePets(id);
             return owner;
         }
 

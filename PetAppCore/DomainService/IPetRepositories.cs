@@ -7,7 +7,7 @@ namespace PetAppCore.DomainService
 {
     public interface IPetRepositories
     {
-        IEnumerable<Pet> ReadPets();
+        IEnumerable<Pet> ReadPets(Filter filter = null);
 
         Pet CreatePet(Pet pet);
 
@@ -16,5 +16,9 @@ namespace PetAppCore.DomainService
         Pet ReadyById(int id);
 
         Pet Update(Pet customerUpdate);
+
+        Pet FindPetByIdIncludeOwners(int id);
+
+        int Count();
     }
 }

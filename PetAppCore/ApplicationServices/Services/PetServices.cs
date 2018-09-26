@@ -3,6 +3,7 @@ using PetAppCore.ApplicationServices;
 using PetAppCore.DomainService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -85,12 +86,30 @@ namespace PetAppCore.Services
 
         public Pet FindPetByIdIncludOwners(int id)
         {
-            var pet = _petRepositories.ReadyById(id);
-            pet.Pets = _ownerRepositories.ReadPets()
-                .Where(p => p.PetPreviousOwner !=
-                null && p.PetPreviousOwner.Id == pet.Id)
-                .ToList();
-            return pet;
+            throw new NotImplementedException();
         }
+
+        public List<Pet> GetFilteredPets(Filter filter)
+        {
+            if (filter.CurrentPage < 0 || filter.ItemsPrPage < 0)
+            {
+                throw new InvalidDataException("Current page and Items page must be zero or more");
+            }
+            if ((filter.CurrentPage -1 * filter.ItemsPrPage) >= _petRepository.Count())
+            {
+                throw new InvalidDataException("Index out of bounds, Curret page is too high");
+            }
+            return _petRepository.ReadPets(filter).ToList();
+        }
+
+        /* public Pet FindPetByIdIncludOwners(int id)
+         {
+             var pet = _petRepositories.ReadyById(id);
+             pet.Pets = _ownerRepositories.ReadPets()
+                 .Where(p => p.PetPreviousOwner !=
+                 null && p.PetPreviousOwner.Id == pet.Id)
+                 .ToList();
+             return pet;
+         }*/
     }
 }

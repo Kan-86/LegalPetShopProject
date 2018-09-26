@@ -12,6 +12,11 @@ namespace PetApp.Infastructure.Static.Data.Repositories
         static int id = 1;
         private static List<Pet> _pets = FakeDB.Pets.ToList();
 
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+
         public Pet CreatePet(Pet pet)
         {
             pet.Id = FakeDB.PetID++;
@@ -30,7 +35,12 @@ namespace PetApp.Infastructure.Static.Data.Repositories
             FakeDB.Pets = pets;
         }
 
-        public IEnumerable<Pet> ReadPets()
+        public Pet FindPetByIdIncludeOwners(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Pet> ReadPets(Filter filter = null)
         {
             return FakeDB.Pets;
         }
