@@ -62,7 +62,7 @@ namespace PetShopRestAPI
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<PetShopAppContext>(
-                    opt => opt.UseSqlite("Data Source=PetShopDb.db"));
+                    opt => opt.UseSqlite("Data Source=petshopserver2018.db"));
             }
             else if (_env.IsProduction())
             {
