@@ -4,7 +4,12 @@ using System.Text;
 
 namespace PetAppCore.DomainService
 {
-    interface IUserRepositories
+    public interface IUserRepositories<T>
     {
+        IEnumerable<T> GetAll();
+        T Get(long id);
+        void Add(T entity);
+        void Edit(T entity);
+        void Remove(long id);
     }
 }

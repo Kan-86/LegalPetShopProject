@@ -29,13 +29,6 @@ namespace PetShopRestAPI
 {
     public class Startup
     {
-        /*
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-            //FakeDB.InitData();
-        }*/
-
         private IConfiguration _conf { get; }
 
         private IHostingEnvironment _env { get; set; }
