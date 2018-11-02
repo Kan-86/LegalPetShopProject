@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PetApp.Core.Entity;
@@ -21,6 +23,7 @@ using PetAppCore.ApplicationServices;
 using PetAppCore.ApplicationServices.Services;
 using PetAppCore.DomainService;
 using PetAppCore.Services;
+using PetShopRestAPI.Helpers;
 
 namespace PetShopRestAPI
 {
@@ -46,6 +49,7 @@ namespace PetShopRestAPI
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             _conf = builder.Build();
+            JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
         }
 
         public IConfiguration Configuration { get; }
@@ -58,6 +62,22 @@ namespace PetShopRestAPI
 
             /*services.AddDbContext<PetShopAppContext>(
                 opt => opt.UseSqlite("Data Source=petApp.db"));*/
+
+            // Add JWT based authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    //ValidAudience = "TodoApiClient",
+                    ValidateIssuer = false,
+                    //ValidIssuer = "TodoApi",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = JwtSecurityKey.Key,
+                    ValidateLifetime = true, //validate the expiration and not before values in the token
+                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                };
+            });
 
             if (_env.IsDevelopment())
             {
@@ -109,7 +129,7 @@ namespace PetShopRestAPI
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

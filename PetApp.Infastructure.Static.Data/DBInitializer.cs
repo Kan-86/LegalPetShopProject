@@ -11,15 +11,15 @@ namespace PetApp.Infastructure.Static.Data
             //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
             /*
-            var owner1 = ctx.Owners.Add(new Owner()
-            {
-                FirstName = "Kasper",
-                LastName = "Rask",
-                Address = "Skjoldsgade",
-                Email = "ilovepolser@polser.dk",
-                PhoneNumber = 7878997
+             var owner1 = ctx.Owners.Add(new Owner()
+             {
+                 FirstName = "Kasper",
+                 LastName = "Rask",
+                 Address = "Skjoldsgade",
+                 Email = "ilovepolser@polser.dk",
+                 PhoneNumber = 7878997
 
-            }).Entity;
+             }).Entity;
 
             var owner2 = ctx.Owners.Add(new Owner()
             {
