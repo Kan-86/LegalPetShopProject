@@ -9,7 +9,6 @@ namespace PetApp.Infastructure.Static.Data.Repositories
 {
     public class PetRepositories : IPetRepositories
     {
-        static int id = 1;
         private static List<Pet> _pets = FakeDB.Pets.ToList();
 
         public int Count()

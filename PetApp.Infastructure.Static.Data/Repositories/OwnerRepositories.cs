@@ -9,7 +9,6 @@ namespace PetApp.Infastructure.Static.Data.Repositories
 {
     public class OwnerRepositories : IOwnerRepositories
     {
-        static int id = 1;
         private static List<Owner> _owners = FakeDB.Owners.ToList();
 
         public Owner GetOwnerById(int id)

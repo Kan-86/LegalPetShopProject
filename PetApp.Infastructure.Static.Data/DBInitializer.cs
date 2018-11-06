@@ -1,5 +1,8 @@
-﻿using System;
+﻿using PetApp.Core.Entity.Models;
+using PetShopRestAPI.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetApp.Infastructure.Static.Data
@@ -10,6 +13,42 @@ namespace PetApp.Infastructure.Static.Data
         {
             //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
+
+            if (ctx.UserToDo.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            List<UserToDoItem> items = new List<UserToDoItem>
+            {
+                new UserToDoItem { IsComplete=true, Name="Make homework"},
+                new UserToDoItem { IsComplete=false, Name="Sleep"}
+            };
+
+            // Create two users with hashed and salted passwords
+            string password = "1234";
+            byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
+            CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
+            CreatePasswordHash(password, out passwordHashAnn, out passwordSaltAnn);
+
+            List<User> users = new List<User>
+            {
+                new User {
+                    Username = "UserJoe",
+                    PasswordHash = passwordHashJoe,
+                    PasswordSalt = passwordSaltJoe,
+                    IsAdmin = false
+                },
+                new User {
+                    Username = "AdminAnn",
+                    PasswordHash = passwordHashAnn,
+                    PasswordSalt = passwordSaltAnn,
+                    IsAdmin = true
+                }
+            };
+
+
+
             /*
              var owner1 = ctx.Owners.Add(new Owner()
              {
@@ -52,7 +91,18 @@ namespace PetApp.Infastructure.Static.Data
                 Price = 989
             }).Entity;
             */
+            ctx.UserToDo.AddRange(items);
+            ctx.User.AddRange(users);
             ctx.SaveChanges();
+        }
+
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
     }
 }

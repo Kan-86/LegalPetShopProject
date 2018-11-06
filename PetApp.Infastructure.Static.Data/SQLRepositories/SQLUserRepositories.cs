@@ -8,11 +8,11 @@ using System.Text;
 
 namespace PetApp.Infastructure.Static.Data.SQLRepositories
 {
-    public class UserRepositories : IUserRepositories<User>
+    public class SQLUserRepositories : IUserRepositories<User>
     {
         private readonly PetShopAppContext db; 
 
-        public UserRepositories(PetShopAppContext ctx)
+        public SQLUserRepositories(PetShopAppContext ctx)
         {
             db = ctx;
         }

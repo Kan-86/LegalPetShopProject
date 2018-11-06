@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetApp.Core.Entity;
+using PetApp.Core.Entity.Models;
 using PetShopRestAPI.Models;
 
 namespace PetApp.Infastructure.Static.Data
@@ -23,6 +24,7 @@ namespace PetApp.Infastructure.Static.Data
             //    .HasKey(o => new { o.Id, o.Pets });
         }
 
+        public DbSet<UserToDoItem> UserToDo { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Pet> Pet { get; set; }
         public DbSet<Owner> Owners { get; set; }

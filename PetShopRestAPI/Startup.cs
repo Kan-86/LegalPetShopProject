@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PetApp.Core.Entity;
+using PetApp.Core.Entity.Models;
 using PetApp.Infastructure.Static.Data;
 using PetApp.Infastructure.Static.Data.Repositories;
 using PetApp.Infastructure.Static.Data.SQLRepositories;
@@ -24,6 +25,7 @@ using PetAppCore.ApplicationServices.Services;
 using PetAppCore.DomainService;
 using PetAppCore.Services;
 using PetShopRestAPI.Helpers;
+using PetShopRestAPI.Models;
 
 namespace PetShopRestAPI
 {
@@ -33,19 +35,15 @@ namespace PetShopRestAPI
 
         private IHostingEnvironment _env { get; set; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            _env = env;
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            _conf = builder.Build();
+            Configuration = configuration;
+            Environment = env;
             JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -56,6 +54,7 @@ namespace PetShopRestAPI
             /*services.AddDbContext<PetShopAppContext>(
                 opt => opt.UseSqlite("Data Source=petApp.db"));*/
 
+            // Add JWT based authentication
             // Add JWT based authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -72,16 +71,18 @@ namespace PetShopRestAPI
                 };
             });
 
-            if (_env.IsDevelopment())
+            services.AddCors();
+
+            if (Environment.IsDevelopment())
             {
-                services.AddDbContext<PetShopAppContext>(
-                    opt => opt.UseSqlite("Data Source=petshopapp2018.db"));
+                // In-memory database:
+                services.AddDbContext<PetShopAppContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             }
-            else if (_env.IsProduction())
+            else
             {
-                services.AddDbContext<PetShopAppContext>(
-                    opt => opt
-                        .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
+                // Azure SQL database:
+                services.AddDbContext<PetShopAppContext>(opt =>
+                         opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
 
             services.AddScoped<IPetRepositories, SQLPetRepository>();
@@ -90,11 +91,22 @@ namespace PetShopRestAPI
             services.AddScoped<IOwnerRepositories, SQLOwnerRepository>();
             services.AddScoped<IOwnerServices, OwnerServices>();
 
+            services.AddScoped<IUserRepositories<UserToDoItem>, SQLUserToDoItemRepositories>();
+            services.AddScoped<IUserRepositories<User>, SQLUserRepositories>();
+
+
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver =
                 new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:44200").AllowAnyHeader()
+                        .AllowAnyMethod());
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -121,8 +133,12 @@ namespace PetShopRestAPI
                 }
                 app.UseHsts();
             }
+            // Use authentication
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
+            // Enable CORS (must precede app.UseMvc()):
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
         }
     }
