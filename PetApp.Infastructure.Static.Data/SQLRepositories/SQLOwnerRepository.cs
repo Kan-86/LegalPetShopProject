@@ -52,26 +52,7 @@ namespace PetApp.Infastructure.Static.Data.SQLRepositories
 
         public Owner Update(Owner ownerUpdate)
         {
-            /*_ctx.Owners.Update(ownerUpdate);
-            _ctx.SaveChanges();
-            return ownerUpdate;*/
-
-            /*if (ownerUpdate.Pets != null
-                && _ctx.ChangeTracker.Entries<Pet>()
-                .FirstOrDefault(oe => oe.Entity.Id == ownerUpdate.Id) == null)
-            {
-                _ctx.Attach(ownerUpdate.Pets);
-            }
-            else
-            {
-                _ctx.Entry(ownerUpdate)
-                    .Reference(o => o.Pets).IsModified = true;
-            }
-            var updated = _ctx.Owners.Update(ownerUpdate).Entity;
-            _ctx.SaveChanges();*/
-            _ctx.Attach(ownerUpdate).State = EntityState.Modified;
-            _ctx.Entry(ownerUpdate)
-                .Reference(o => o.Pets).IsModified = true;
+            _ctx.Owners.Update(ownerUpdate);
             _ctx.SaveChanges();
             return ownerUpdate;
         }
@@ -80,9 +61,6 @@ namespace PetApp.Infastructure.Static.Data.SQLRepositories
         {
             _ctx.Remove(new Owner() { Id = id });
             _ctx.SaveChanges();
-            /*var pet = ReadyById(id);
-            _ctx.Owners.Remove(pet);
-            _ctx.SaveChanges();*/
         }
 
         public Owner ReadyByIdIncludePets(int id)
