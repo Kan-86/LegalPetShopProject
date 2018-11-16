@@ -1,4 +1,5 @@
-﻿using PetApp.Core.Entity.Models;
+﻿using PetApp.Core.Entity;
+using PetApp.Core.Entity.Models;
 using PetShopRestAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -49,22 +50,22 @@ namespace PetApp.Infastructure.Static.Data
 
 
 
-            /*
-             var owner1 = ctx.Owners.Add(new Owner()
+            /* lol
+            var owner1 = ctx.Owners.Add(new Owner()
              {
-                 FirstName = "Kasper",
-                 LastName = "Rask",
-                 Address = "Skjoldsgade",
-                 Email = "ilovepolser@polser.dk",
-                 PhoneNumber = 7878997
+                 FirstName = "Bastian",
+                 LastName = "Bønkel",
+                 Address = "Esbjerg",
+                 Email = "ilovepika@pika.dk",
+                 PhoneNumber = 454545
 
              }).Entity;
 
             var owner2 = ctx.Owners.Add(new Owner()
             {
-                FirstName = "Jacob",
-                LastName = "Dyrvig",
-                Address = "Varde(Somewhere)",
+                FirstName = "Nikolai",
+                LastName = "Something",
+                Address = "Esbjerg(Somewhere)",
                 Email = "ilikebeer@beer.dk",
                 PhoneNumber = 69696969
             }).Entity;
@@ -89,8 +90,8 @@ namespace PetApp.Infastructure.Static.Data
                 PetPreviousOwner = owner2,
                 PetBirthDate = DateTime.Now,
                 Price = 989
-            }).Entity;
-            */
+            }).Entity;*/
+
             ctx.UserToDo.AddRange(items);
             ctx.User.AddRange(users);
             ctx.SaveChanges();
