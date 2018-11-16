@@ -14,10 +14,10 @@ namespace PetApp.Infastructure.Static.Data
             //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
-            if (ctx.UserToDo.Any())
-            {
-                return;   // DB has been seeded
-            }
+            //if (ctx.UserToDo.Any())
+            //{
+            //    return;   // DB has been seeded
+            //}
 
             List<UserToDoItem> items = new List<UserToDoItem>
             {
