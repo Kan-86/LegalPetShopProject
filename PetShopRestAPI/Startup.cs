@@ -143,9 +143,11 @@ namespace PetShopRestAPI
             // Use authentication
             app.UseAuthentication();
 
-            app.UseHttpsRedirection();
             // Enable CORS (must precede app.UseMvc()):
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseHttpsRedirection();
+
             app.UseMvc();
         }
     }
