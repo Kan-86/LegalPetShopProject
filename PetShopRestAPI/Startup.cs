@@ -127,6 +127,8 @@ namespace PetShopRestAPI
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                    ctx.Database.EnsureDeleted();
+                    ctx.Database.EnsureCreated();
                     DBInitializer.SeedDb(ctx);
                 }
             }

@@ -12,19 +12,12 @@ namespace PetApp.Infastructure.Static.Data
     {
         public static void SeedDb(PetShopAppContext ctx)
         {
-            //ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
+
 
             //if (ctx.UserToDo.Any())
             //{
             //    return;   // DB has been seeded
             //}
-
-            List<UserToDoItem> items = new List<UserToDoItem>
-            {
-                new UserToDoItem { IsComplete=true, Name="Make homework"},
-                new UserToDoItem { IsComplete=false, Name="Sleep"}
-            };
 
             // Create two users with hashed and salted passwords
             string password = "1234";
@@ -35,16 +28,16 @@ namespace PetApp.Infastructure.Static.Data
             List<User> users = new List<User>
             {
                 new User {
-                    Username = "UserJoe",
+                    Username = "krisp",
                     PasswordHash = passwordHashJoe,
                     PasswordSalt = passwordSaltJoe,
-                    IsAdmin = false
+                    IsAdmin = true
                 },
                 new User {
-                    Username = "AdminAnn",
+                    Username = "jacob",
                     PasswordHash = passwordHashAnn,
                     PasswordSalt = passwordSaltAnn,
-                    IsAdmin = true
+                    IsAdmin = false
                 }
             };
 
@@ -91,8 +84,6 @@ namespace PetApp.Infastructure.Static.Data
                 PetBirthDate = DateTime.Now,
                 Price = 989
             }).Entity;*/
-
-            ctx.UserToDo.AddRange(items);
             ctx.User.AddRange(users);
             ctx.SaveChanges();
         }

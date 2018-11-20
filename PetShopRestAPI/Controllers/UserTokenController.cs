@@ -43,7 +43,7 @@ namespace PetShopRestAPI.Controllers
             return Ok(new
             {
                 username = user.Username,
-                IsAdmin = user.IsAdmin,
+                user.IsAdmin,
                 token = GenerateToken(user)
             });
         }
