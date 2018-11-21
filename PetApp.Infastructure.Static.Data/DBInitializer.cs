@@ -20,7 +20,7 @@ namespace PetApp.Infastructure.Static.Data
             //}
 
             // Create two users with hashed and salted passwords
-            string password = "1234";
+            string password = "4321";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
             CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
             CreatePasswordHash(password, out passwordHashAnn, out passwordSaltAnn);
@@ -28,13 +28,13 @@ namespace PetApp.Infastructure.Static.Data
             List<User> users = new List<User>
             {
                 new User {
-                    Username = "krisp",
+                    Username = "Sam",
                     PasswordHash = passwordHashJoe,
                     PasswordSalt = passwordSaltJoe,
                     IsAdmin = true
                 },
                 new User {
-                    Username = "jacob",
+                    Username = "Kasper",
                     PasswordHash = passwordHashAnn,
                     PasswordSalt = passwordSaltAnn,
                     IsAdmin = false
